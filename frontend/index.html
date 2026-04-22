@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Secure | University Project</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/forge/1.3.1/forge.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Auth Section -->
+        <div id="auth-container" class="auth-wrapper">
+            <div class="wa-logo">💬</div>
+            <div class="auth-header">
+                <h1 id="auth-title">Sign In</h1>
+            </div>
+
+            <div class="form-body">
+                <input type="text" id="username" class="input-field" placeholder="Username">
+                <input type="password" id="password" class="input-field" placeholder="Password">
+                <button id="auth-btn" class="action-btn" onclick="handleAuth()">Login</button>
+            </div>
+
+            <p class="toggle-auth">
+                New user? <span onclick="toggleAuthMode()">Create account</span>
+            </p>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard-container" class="app-layout hidden">
+            <aside class="side-panel">
+                <div class="profile-header">
+                    <div class="avatar-md" id="avatar-char">U</div>
+                    <div class="user-name" id="current-user-display">User</div>
+                    <button class="logout-btn"
+                        style="border:none; background:none; color:#54656f; font-size:1.2rem; cursor:pointer;"
+                        onclick="logout()">⚙</button>
+                </div>
+
+                <div class="user-list-container" id="user-list">
+                    <!-- Contacts here -->
+                </div>
+            </aside>
+
+            <main class="chat-window">
+                <div class="chat-banner">
+                    <div class="avatar-md" style="background:#cbd5e1;">?</div>
+                    <div class="banner-title">
+                        <h2 id="receiver-name" style="font-size:1rem; color:#111b21;">Select a contact</h2>
+                    </div>
+                </div>
+
+                <div id="messages-container" class="view-port">
+                    <!-- Messages here -->
+                </div>
+
+                <div id="message-input-area" class="chat-input-bar hidden">
+                    <div class="input-container">
+                        <input type="text" id="message-text" class="message-box" placeholder="Type a message">
+                    </div>
+                    <button class="send-button" onclick="sendMessage()">▶</button>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
