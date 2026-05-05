@@ -9,7 +9,7 @@ async function seed() {
         await sequelize.sync({ force: true });
         console.log('Database synced (all tables dropped and recreated)');
 
-        // Create RSA Keys for Alice and Bob
+        // Create RSA Keys for Test1 and Test2
         const keyPairAlice = forge.pki.rsa.generateKeyPair(2048);
         const publicKeyAlice = forge.pki.publicKeyToPem(keyPairAlice.publicKey);
         const privateKeyAlice = forge.pki.privateKeyToPem(keyPairAlice.privateKey);
@@ -18,30 +18,30 @@ async function seed() {
         const publicKeyBob = forge.pki.publicKeyToPem(keyPairBob.publicKey);
         const privateKeyBob = forge.pki.privateKeyToPem(keyPairBob.privateKey);
 
-        const alicePass = await bcrypt.hash('alice123', 10);
-        const bobPass = await bcrypt.hash('bob123', 10);
+        const alicePass = await bcrypt.hash('12345678', 10);
+        const bobPass = await bcrypt.hash('12345678', 10);
 
         const alice = await User.create({
-            username: 'Alice',
+            username: 'Test1',
             password_hash: alicePass,
             public_key: publicKeyAlice,
             private_key: privateKeyAlice
         });
 
         const bob = await User.create({
-            username: 'Bob',
+            username: 'Test2',
             password_hash: bobPass,
             public_key: publicKeyBob,
             private_key: privateKeyBob
         });
 
         console.log('Test users created:');
-        console.log('1. Alice (Password: alice123)');
-        console.log('2. Bob (Password: bob123)');
+        console.log('1. Test1 (Password: 12345678)');
+        console.log('2. Test2 (Password: 12345678)');
 
         // Optional: Create an initial message from Alice to Bob
         // For the seed, we'll just encrypt a hello message
-        const buffer = forge.util.encodeUtf8('Hello Bob! This is our first secure chat.');
+        const buffer = forge.util.encodeUtf8('Hello Test2! This is our first secure chat.');
         const encrypted = keyPairBob.publicKey.encrypt(buffer, 'RSA-OAEP', {
             md: forge.md.sha256.create(),
             mgf1: { md: forge.md.sha256.create() }

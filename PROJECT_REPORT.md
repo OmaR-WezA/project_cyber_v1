@@ -30,7 +30,7 @@ This application is a secure messaging platform designed to demonstrate modern c
 4. **Start Server**: Run `npm start`.
 
 ### Demonstration Flow
-1. **Login**: Use Alice (password: `alice123`) or register a new student.
+1. **Login**: Use **Test1** (password: `12345678`) or register a new student.
 2. **Select Contact**: Choose a contact from the sidebar.
 3. **Send Message**: Type your message and click Send.
 4. **View Encryption**: 

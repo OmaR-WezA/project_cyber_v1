@@ -25,7 +25,7 @@ router.get('/setup-project', async (req, res) => {
         // 1. Sync & Clear
         await sequelize.sync({ force: true });
 
-        // 2. Seed Alice & Bob
+        // 2. Seed Test Users
         const keyPairAlice = forge.pki.rsa.generateKeyPair(2048);
         const publicKeyAlice = forge.pki.publicKeyToPem(keyPairAlice.publicKey);
         const privateKeyAlice = forge.pki.privateKeyToPem(keyPairAlice.privateKey);
@@ -34,19 +34,19 @@ router.get('/setup-project', async (req, res) => {
         const publicKeyBob = forge.pki.publicKeyToPem(keyPairBob.publicKey);
         const privateKeyBob = forge.pki.privateKeyToPem(keyPairBob.privateKey);
 
-        const alicePass = await bcrypt.hash('alice123', 10);
-        const bobPass = await bcrypt.hash('bob123', 10);
+        const test1Pass = await bcrypt.hash('12345678', 10);
+        const test2Pass = await bcrypt.hash('12345678', 10);
 
-        const alice = await User.create({
-            username: 'Alice',
-            password_hash: alicePass,
+        const test1 = await User.create({
+            username: 'Test1',
+            password_hash: test1Pass,
             public_key: publicKeyAlice,
             private_key: privateKeyAlice
         });
 
-        const bob = await User.create({
-            username: 'Bob',
-            password_hash: bobPass,
+        const test2 = await User.create({
+            username: 'Test2',
+            password_hash: test2Pass,
             public_key: publicKeyBob,
             private_key: privateKeyBob
         });
@@ -58,8 +58,8 @@ router.get('/setup-project', async (req, res) => {
             success: true,
             message: 'Database initialized and seeded successfully!',
             test_accounts: {
-                alice: 'password: alice123',
-                bob: 'password: bob123'
+                test1: 'password: 12345678',
+                test2: 'password: 12345678'
             }
         });
     } catch (error) {
